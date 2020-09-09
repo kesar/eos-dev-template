@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(demo_contracts)
 
-set(VERSION_MAJOR 3)
+set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 0)
 #set(VERSION_SUFFIX rc4)
@@ -37,6 +37,8 @@ elseif(VERSION_OUTPUT STREQUAL "WARN")
 else() # INVALID OR MISMATCH
     message(FATAL_ERROR "Found eosio.cdt version ${EOSIO_CDT_VERSION} but it does not satisfy version requirements: ${VERSION_MATCH_ERROR_MSG}\nPlease use eosio.cdt version ${EOSIO_CDT_VERSION_SOFT_MAX}.x")
 endif(VERSION_OUTPUT STREQUAL "MATCH")
+
+message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(TEST_BUILD_TYPE "Debug")
@@ -75,7 +77,7 @@ string(REPLACE ";" "|" TEST_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
 string(REPLACE ";" "|" TEST_FRAMEWORK_PATH "${CMAKE_FRAMEWORK_PATH}")
 string(REPLACE ";" "|" TEST_MODULE_PATH "${CMAKE_MODULE_PATH}")
 
-set(BUILD_TESTS TRUE CACHE BOOL "Build unit tests")
+set(BUILD_TESTS FALSE CACHE BOOL "Build unit tests")
 
 if(BUILD_TESTS)
     message(STATUS "Building unit tests.")
